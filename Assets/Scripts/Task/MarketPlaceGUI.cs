@@ -8,10 +8,19 @@ public class MarketPlaceGUI : MonoBehaviour
     public Slider CoinsSlider;
     public Slider PotSlider;
     [SerializeField] private GameObject GUIObject;
+
     public void CloseBtn()
     {
         LevelManager.Instance.DeselectMarketPlace();
         GUIObject.SetActive(false);
+    }
+
+    public void SetGUIData(MarketPlace currentMarketPlace)
+    {
+        MarketName.text = currentMarketPlace.Name;
+        CoinsSlider.value = currentMarketPlace.CoinsCount;
+        ManaSlider.value = currentMarketPlace.ManaCount;
+        PotSlider.value = currentMarketPlace.PotsCount;
     }
 
     private void Start()

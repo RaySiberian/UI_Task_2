@@ -1,15 +1,13 @@
-using System;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
-    public static LevelManager Instance { get; private set; }
-
     [SerializeField] private MarketPlaceGUI marketPlaceGUI;
     [SerializeField] private GameObject GUIObject;
+    //[SerializeField] private Resources resources;
     private MarketPlace currentMarketPlace;
 
+    public static LevelManager Instance { get; private set; }
     private void Awake()
     {
         if (!Instance)
@@ -60,8 +58,6 @@ public class LevelManager : MonoBehaviour
             case ResourceType.Pots:
                 currentMarketPlace.PotsCount = value;
                 break;
-            default:
-                throw new ArgumentOutOfRangeException(nameof(resourceType), resourceType, null);
         }
     }
 
@@ -73,10 +69,7 @@ public class LevelManager : MonoBehaviour
     private void FillMarketPlaceData()
     {
         GUIObject.SetActive(true);
-        marketPlaceGUI.MarketName.text = currentMarketPlace.Name;
-        marketPlaceGUI.CoinsSlider.value = currentMarketPlace.CoinsCount;
-        marketPlaceGUI.ManaSlider.value = currentMarketPlace.ManaCount;
-        marketPlaceGUI.PotSlider.value = currentMarketPlace.PotsCount;
+        marketPlaceGUI.SetGUIData(currentMarketPlace);
     }
 }
 
